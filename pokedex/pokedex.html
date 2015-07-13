@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Pokedex</title>
+        <script src="js/jquery.js"></script>
+        <script src="js/jquery_mobile.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/jquery_mobile.css">
+        <link rel="stylesheet" type="text/css" href="css/estilos.css">
+    </head>
+
+    <body>
+        <div data-role="page" id="Pagina1">
+            <div id="Encabezado"></div>
+
+            <!--  Contenido-->  
+            <div data-role="content" class="inicio">
+
+            </div>
+            <!--  Termina Contenido-->
+            <!--  Footer-->
+            <div data-role="footer" data-theme="b" id="Footer">
+                <h4>Pokedex</h4>
+            </div>
+            <!--  Termina Footer-->
+        </div>
+        <!--Termina Pagina1-->
+
+        <!--Descripcion-->
+        <div data-role="page" id="Descripcion">
+            <div id="Encabezado">
+                <a href="#Pagina1" ><img  id="atras" src="Fondo/flecha.png"></a>
+            </div>
+            <!--Contenido-->
+            <div data-role="content">
+                <div id="pokemon"></div>
+            </div>
+            <!--Termina Contenido-->
+
+            <!--Footer-->
+            <div data-role="footer" data-theme="b" id="Footer">
+                <h4>Pokedex</h4>
+            </div>
+            <!--Termina Footer-->
+        </div>
+        <!--Termina Descripcion-->
+        <script>
+
+            /*Aqui voy a imprimir las imagenes con los enlaces de cada pokemon, lo imprimo con ayuda del archivo JSON
+             * Los imprimo tomando el nombre del pokemon y agregandole .jpg, para el id, tomo el nombre, pudo ser el numero que traen, pero funciona igual
+             */
+            $.getJSON('json/pokemons.json', function (archivo) {
+                for (var i = 0; i < archivo.length; i++) {
+                    var html0;
+
+                    if (archivo[i].nombre.indexOf("♀") > 0) { //Como Nidoran♀ tiene un caracter especial, la imagen no se imprime, o mas bien es llamada nidoranf, este metodo es para imprimirla
+                        html0 = "<div class=\"contenedor\"><a href=\"#Descripcion\" data-transition=\"slide\" data-id=\"" + archivo[i].nombre + "\"><div class=\"pokemon\"><img src=\"img/nidoranf.jpg\" alt=\"\"/></div></a><label>" + archivo[i].nombre + "</label></div>";
+                    } else if (archivo[i].nombre.indexOf("♂") > 0) {//Como Nidoran♂ tiene un caracter especial, la imagen no se imprime, o mas bien es llamada nidoranm, este metodo es para imprimirla
+                        html0 = "<div class=\"contenedor\"><a href=\"#Descripcion\" data-transition=\"slide\" data-id=\"" + archivo[i].nombre + "\"><div class=\"pokemon\"><img src=\"img/nidoranm.jpg\" alt=\"\"/></div></a><label>" + archivo[i].nombre + "</label></div>";
+                    } else if (archivo[i].nombre.indexOf("Farfetch'd") > -1) {//Farfetch'd tiene una comilla, asi que al igual que los anteriores, hice este metodo para imprimir la imagen
+                        html0 = "<div class=\"contenedor\"><a href=\"#Descripcion\" data-transition=\"slide\" data-id=\"" + archivo[i].nombre + "\"><div class=\"pokemon\"><img src=\"img/farfetchd.jpg\" alt=\"\"/></div></a><label>" + archivo[i].nombre + "</label></div>";
+                    } else if (archivo[i].nombre.indexOf("Mr. Mime") > -1) {//Mr. Mime tiene un punto y un espacio, no colaboran para imprimir, asi que toca hacer esta validacion
+                        html0 = "<div class=\"contenedor\"><a href=\"#Descripcion\" data-transition=\"slide\" data-id=\"" + archivo[i].nombre + "\"><div class=\"pokemon\"><img src=\"img/mrmime.jpg\" alt=\"\"/></div></a><label>" + archivo[i].nombre + "</label></div>";
+                    } else //Este ultimo else es para imprimir los pokemon que no tienen caracteres especiales en sus nombres
+                    {
+                        html0 = "<div class=\"contenedor\"><a href=\"#Descripcion\" data-transition=\"slide\" data-id=\"" + archivo[i].nombre + "\"><div class=\"pokemon\"><img src=\"img/" + archivo[i].nombre.toLowerCase() + ".jpg\" alt=\"\"/></div></a><label>" + archivo[i].nombre + "</label></div>";
+                    }
+                    $(".inicio").append(html0);
+                }
+            });
+            $.ajax({
+                url: "json/pokemons.json",
+                dataType: "json",
+                success: function (archivo) {
+                    /*
+                     * Aqui, con este metodo ajax, analizo que, cuando se le de click a un enlace, me tome el id (en este caso el nombre del pokemon)
+                     * Luego lo busco en el archivo JSON y lo imprimo
+                     */
+                    $(document).on("click", "a", function () {
+                        $("#pokemon").empty();
+                        var nombre = $(this).data('id');
+                        for (var i = 0; i < archivo.length; i++) {
+                            //entro de este ciclo busco el nombre, cuando lo encuentra, lo imprime dentro del mismo if
+                            if (archivo[i].nombre === nombre) {
+                                var html = "<li>";
+                                html += "<h1>" + archivo[i].nombre + "</h1>";
+                                html += "<div id=infoPokemon>"
+                                html += "<h5>" + "Nº " + archivo[i].id + "</h5><br>";
+                                if (archivo[i].nombre.indexOf("♀") > 0) { //Como Nidoran♀ tiene un caracter especial, la imagen no se imprime, o mas bien es llamada nidoranf, este metodo es para imprimirla
+                                    html += "<div class=\"contenedorImg\"><img class='ImgPoke' src=\"img/nidoranf.jpg\" alt=\"\"/></div>";
+                                } else if (archivo[i].nombre.indexOf("♂") > 0) {//Como Nidoran♂ tiene un caracter especial, la imagen no se imprime, o mas bien es llamada nidoranm, este metodo es para imprimirla
+                                    html += "<div class=\"contenedorImg\"><img class='ImgPoke' src=\"img/nidoranm.jpg\" alt=\"\"/></div>";
+                                } else if (archivo[i].nombre.indexOf("Farfetch'd") > -1) {//Farfetch'd tiene una comilla, asi que al igual que los anteriores, hice este metodo para imprimir la imagen
+                                    html += "<div class=\"contenedorImg\"><img class='ImgPoke' src=\"img/farfetchd.jpg\" alt=\"\"/></div>";
+                                } else if (archivo[i].nombre.indexOf("Mr. Mime") > -1) {//Mr. Mime tiene un punto y un espacio, no colaboran para imprimir, asi que toca hacer esta validacion
+                                    html += "<div class=\"contenedorImg\"><img class='ImgPoke' src=\"img/mrmime.jpg\" alt=\"\"/></div>";
+                                } else //Este ultimo else es para imprimir los pokemon que no tienen caracteres especiales en sus nombres
+                                {
+                                    html += "<div class=\"contenedorImg\"><img class='ImgPoke' src=\"img/" + archivo[i].nombre.toLowerCase() + ".jpg\" alt=\"\"/></div>"
+                                }
+                                html += "<label class='titulo'>" + "Especie" + "</label>" + "<p>" + archivo[i].especie + "</p>";
+                                html += "<label class='titulo'>" + "Tipos" + "</label>" + "<p>";
+                                //Como los tipos pueden ser mas de uno, hice este otro for
+                                for (var j = 0; j < archivo[i].tipo.length; j++) {
+                                    html += j + 1 + ". " + archivo[i].tipo[j] + "<br>" + " "
+                                }
+                                html += "</p>";
+                                html += "<label class='titulo'>" + "Alto" + "</label>" + "<p>" + archivo[i].alto + "</p>";
+                                html += "<label class='titulo'>" + "Ancho" + "</label>" + "<p>" + archivo[i].ancho + "</p>";
+                                html += "<label class='titulo'>" + "Habilidades" + "</label>" + "<p>";
+                                // Al igual que con los tipos, las habilidades pueden ser mas de una
+                                for (var j = 0; j < archivo[i].habilidades.length; j++) {
+                                    html += j + 1 + ". " + archivo[i].habilidades[j] + "<br>" + " "
+                                }
+                                html += "</p>";
+                                html += "</div>"
+                                //En esta tabla ordeno las estadisticas del pokemon
+                                html += " <table><thead><tr>" +
+                                        "<th>Hp</th>" +
+                                        "<th>Attack</th>" +
+                                        "<th>Defense</th>" +
+                                        "<th>Sp. atk</th>" +
+                                        "<th>Sp. def</th>" +
+                                        "<th>Sp. speed</th>" +
+                                        "<th>Total</th>" +
+                                        "</thead>";
+                                html += "<tbody><tr>";
+                                html += "<td>" + archivo[i].estadisticas.hp + "</td>";
+                                html += "<td>" + archivo[i].estadisticas.attack + "</td>";
+                                html += "<td>" + archivo[i].estadisticas.defense + "</td>";
+                                html += "<td>" + archivo[i].estadisticas["sp.atk"] + "</td>";
+                                html += "<td>" + archivo[i].estadisticas["sp.def"] + "</td>";
+                                html += "<td>" + archivo[i].estadisticas.speed + "</td>";
+                                html += "<td>" + archivo[i].estadisticas.total + "</td>";
+                                html += "</tr></table>";
+                                //LAs evoluciones pueden ser mas de una, por eso el for
+                                html += "<div id='Evolucion'";
+                                html += "<p class='Tevo'>" + "Evolución" + "</label>";
+                                html += "<p class='textE'>";
+                                for (var j = 0; j < archivo[i].evolucion.length; j++) {
+                                    html += j + 1 + ". " + archivo[i].evolucion[j] + "<br>" + " "
+                                }
+                                html += "</label>"
+                                html += "</div>"
+                                html += "</li>";
+                                //Aqui imprimo la informacion del pokemon en la pagina
+                                $("#pokemon").append(html);
+                            }
+                        }
+
+                    })
+                }
+            });
+        </script>
+    </body>
+</html>
+

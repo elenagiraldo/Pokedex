@@ -1,0 +1,203 @@
+*{
+    padding:0px;
+    margin:0 auto;
+    font-family:"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, 	sans-serif;
+    list-style:none;
+}
+
+#Pagina1{
+	background-color:rgba(233,233,233,1.00);
+}
+
+#Descripcion{
+	background-color:rgba(255,255,255,1.00);
+	}
+
+#Encabezado{
+    width:100%;
+    height:80px;
+    background-image:url(../Fondo/encabezado.png);
+    background-size:cover;
+    background-repeat:no-repeat;
+	position:fixed;
+	z-index:100;
+}
+
+.inicio{
+	width:80%;
+	height:auto;
+	margin:80px auto;
+	}
+
+#Footer{
+    border:0px;
+    width:100%;
+    height:40px;
+    background-color:rgba(0,0,0,.8);
+}
+
+.contenedor{
+    display: inline-block;
+    margin: 1%;
+    height: 200px;
+    width: 220px;
+	background-color:rgba(255,255,255,1.00);
+	border-radius:7px;
+	padding:20px 0px 0px 0px;
+}
+
+.contenedor:hover{
+	box-shadow:2px 2px 5px #999999;
+	}
+	
+.pokemon{
+	position:relative;
+	width:70%;
+	height:70%;
+	margin-bottom:30px;
+	}
+
+#pokemon{
+	margin-top:80px;
+	width:90%;
+	height:auto;
+	}
+	
+.contenedorImg{
+	margin-top:80px;
+    height:auto;
+    width:260px;
+	background-color:rgba(255,255,255,1.00);
+	border-radius:7px;
+	padding:20px 20px 20px 20px;
+	position:absolute;
+	margin-left:290px;
+}
+
+#infoPokemon{
+	width:220px;
+	height:auto;
+	float:left;
+	position:relative;
+	}
+
+h1{
+	text-align:center;
+	}	
+	
+label{
+	width:220px;
+	height:30px;
+	line-height:30px;
+	color:rgba(255,255,255,1.00);
+	font-size:16px;
+	text-align:center;
+	position:relative;
+	background-color:rgba(20,189,182,1.00);
+	border-top-left-radius:20px;
+	border-top-right-radius:20px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+	}
+	
+.titulo{
+	width:180px;
+	height:30px;
+	line-height:30px;
+	color:rgba(255,255,255,1.00);
+	font-size:16px;
+	background-color:rgba(20,189,182,1.00);
+	border-radius:4px;
+	padding:0px 20px 0px 20px;
+	margin-top:30px;
+	border-top-left-radius:20px;
+	border-top-right-radius:20px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+	}
+	
+p{
+	text-align:center;
+	height:auto;
+	line-height:30px;
+	margin-bottom:10px;
+	margin-top:-4px;
+	background-color:rgba(233,233,233,1.00);
+	border-radius:3px;
+	color:rgba(0,0,0,1.00);
+	}
+
+img { 
+	width:100%;
+}
+
+.ImgPoke{
+	width:90%;
+	height:auto;
+	margin-left:7%;
+	}
+	
+th{
+	line-height:25px;
+	padding:2px 20px 2px 20px;
+	background-color:rgba(72,38,85,1.00);
+	color:rgba(255,255,255,1.00);
+	text-align:center;
+	border-radius:3px;
+	}
+	
+td{
+	line-height:25px;
+	padding:2px 20px 2px 20px;
+	background-color:rgba(233,233,233,1.00);
+	color:rgba(0,0,0,1.00);
+	text-align:center;
+	border-radius:3px;
+	}
+	
+table{
+	margin-top:37px;
+	margin-bottom:50px;
+	}
+	
+#Evolucion{
+	float:left;
+	position:relative;
+	margin-left:530px;
+	}
+	
+.Tevo{
+	width:180px;
+	height:30px;
+	line-height:30px;
+	color:rgba(255,255,255,1.00);
+	font-size:16px;
+	background-color:rgba(255,154,40,1.00);
+	padding:0px 20px 0px 20px;
+	border-top-left-radius:20px;
+	border-top-right-radius:20px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+	text-align:center;
+	}
+	
+.textE{
+	margin-left:-20px;
+	width:220px;
+	text-align:center;
+	height:auto;
+	line-height:30px;
+	margin-bottom:10px;
+	background-color:rgba(233,233,233,1.00);
+	border-radius:3px;
+	margin-top:3px;
+	color:rgba(0,0,0,1.00);
+	}
+	
+#atras{
+	position:relative;
+	width:60px;
+	height:60px;
+	margin-top:10px;
+	margin-left:80%;
+	}
